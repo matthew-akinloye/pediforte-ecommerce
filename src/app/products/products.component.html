@@ -1,0 +1,60 @@
+<!-- <div class="products-container">
+  <div *ngFor="let product of products$ | async" class="product-card">
+    <h3>{{ product.name }}</h3>
+    <p>{{ product.description }}</p>
+    <p>Price: {{ product.price | currency }}</p>
+    <button (click)="addToCart(product)">Add to Cart</button>
+  </div>
+</div>
+
+ -->
+
+
+ <section class="py-5">
+    <div class="container px-4 px-lg-5 mt-5">
+      <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+        <div class="col mb-5" *ngFor="let product of products$ | async">
+          <div class="card h-100">
+            <!-- Product images carousel-->
+            <div *ngIf="product.images!.length > 0" id="carousel{{ product.id }}" class="carousel slide" data-bs-ride="carousel">
+              <div class="carousel-inner">
+                <div *ngFor="let img of product.images; let isFirst = first" class="carousel-item" [class.active]="isFirst">
+                  <img class="d-block w-100 card-img-top uniform-size" [src]="img" [alt]="product.name" (click)="openImageModal(img)">
+                </div>
+              </div>
+              <a class="carousel-control-prev" href="#carousel{{ product.id }}" role="button" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+              </a>
+              <a class="carousel-control-next" href="#carousel{{ product.id }}" role="button" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+              </a>
+            </div>
+            <div *ngIf="product.images!.length === 0" class="text-center p-4">
+              <img class="img-fluid" [src]="'https://dummyimage.com/450x300/dee2e6/6c757d.jpg'" alt="Default Image">
+            </div>
+            <!-- Product details-->
+            <div class="card-body p-4">
+              <div class="text-center">
+                <!-- Product name-->
+                <h5 class="fw-bolder">{{ product.name }}</h5>
+                <!-- Product price-->
+                {{ product.price | currency:'NGN':'symbol':'1.0-0'}}
+              </div>
+            </div>
+            <!-- Product actions-->
+            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+              <div (click)="addToCart(product)" class="text-center">
+                <a class="btn btn-outline-dark mt-auto"> Add to Cart</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+
+
+  

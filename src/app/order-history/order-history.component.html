@@ -1,0 +1,75 @@
+<!-- <h2>Order History</h2>
+
+<div *ngIf="orders$ | async as orders; else noOrders">
+  <div *ngFor="let order of orders">
+    <p>Order ID: {{ order.id }}</p>
+    <p>Status: {{ order.status }}</p>
+    <ul>
+      <li *ngFor="let item of order.items">
+        {{ item.name }} - {{ item.quantity }} x {{ item.price | currency }}
+      </li>
+    </ul>
+    <button (click)="downloadOrder(order.id!)">Download PDF</button>
+  </div>
+</div> -->
+
+
+<section>
+  <div class=" px-4 px-lg-5 mt-5">
+    <div class="row  justify-content-center" *ngIf="orders$ | async as orders; else noOrders">
+
+      <div *ngFor="let order of orders">
+        <div class="d-flex flex-column justify-content-center align-items-center" id="order-heading">
+          <div class="text-uppercase">
+            <p>Order detail</p>
+          </div>
+          <div class="h6">{{ order.createdAt | date}}</div>
+          <div class="pt-1">
+            <p>Order <b class="text-dark"> #{{ order.id }} </b> is currently  <b class="text-dark"> {{ order.status }}</b></p>
+          </div>
+
+        </div>
+        <div class="wrapper bg-white"  >
+          <div class="table-responsive">
+            <table class="table table-borderless">
+              <thead>
+                <tr class="text-uppercase text-muted">
+                  <th scope="col">product</th>
+                  <th scope="col" class="text-right">total</th>
+                </tr>
+              </thead>
+              <tbody *ngFor="let item of order.items">
+                <tr>
+                  <th scope="row">{{ item.name }}</th>
+                  <td class="text-right"><b>{{ item.quantity }} x {{ item.price | currency:'NGN':'symbol':'1.0-0' }}</b></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+       
+     
+          <div class="pt-2 border-bottom mb-3"></div>
+    
+          <div class="d-flex justify-content-between align-items-center pl-3 py-3 mb-4 border-bottom">
+            <div class="text-muted">
+              Grand Total
+            </div>
+            <div class="ml-auto h5">
+            <p class="price"> 
+              {{ calculateGrandTotal(order) | currency:'NGN ':'symbol':'1.0-0' }}
+            </p>  
+            </div>
+          </div>
+          <div class="card-footer bg-transparent text-center">
+            <button (click)="downloadOrder(order.id!)" class="btn btn-outline-dark">Download PDF</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <ng-template #noOrders>
+      <div class="text-center">
+        <p>No orders found.</p>
+      </div>
+    </ng-template>
+  </div>
+</section>

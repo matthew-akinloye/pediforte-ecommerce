@@ -1,0 +1,3 @@
+export interface Cart {
+  items: any[]; // You can define a more specific type for items if needed
+}

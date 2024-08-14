@@ -1,0 +1,19 @@
+.container {
+  padding: auto;
+}
+
+.centered-card {
+  background: white;
+  height: auto;
+  width: 95vw;
+
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.delete-icon {
+      cursor: pointer; 
+  }
+  .form-control{
+    cursor: pointer; 
+  }

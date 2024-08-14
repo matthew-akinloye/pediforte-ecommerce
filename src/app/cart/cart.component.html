@@ -1,0 +1,53 @@
+<div *ngIf="(cartItems$ | async)?.length; else emptyCart">
+  <div class=" mt-50 mb-50">
+    <!-- <div class="col d-flex"><span class="text-muted" id="orderno">order #546924</span></div>
+    <div class="title mx-auto text-primary fw-bold"> Thank you for your order! </div> -->
+    <div class="main">
+      <span id="sub-title">
+        <p class="fw-bold">Payment Summary</p>
+      </span>
+      <div class="row row-main" *ngFor="let item of cartItems$ | async">
+        <div class="col-3"> <img class="img-fluid p-4"[src]="item.images || 'https://dummyimage.com/150x150/dee2e6/6c757d.jpg'" alt="{{ item.name }}"> </div>
+        <div class="col-6">
+          <div class="row d-flex">
+            <p><b> {{ item.name }}</b></p>
+          </div>
+          <div class="row d-flex">
+            <p class="text-muted"> (Quantity: {{ item.quantity || 1 }} | {{item.quantity * item.price | currency:'NGN
+              ':'symbol':'1.0-0'}})</p>
+          </div>
+        </div>
+        <div class="col-3 d-flex justify-content-end">
+          <p><b> {{ item.price | currency:'NGN ':'symbol':'1.0-0'}} <a (click)="removeFromCart(item)"> <svg
+                  xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                  class="bi bi-trash delete-icon" viewBox="0 0 16 16">
+                  <path
+                    d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z" />
+                  <path
+                    d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z" />
+                </svg> </a> </b></p>
+        </div>
+      </div>
+
+      <div class="border-bottom  mt-3 mb-1"></div>
+      <div class="total">
+        <div class="row">
+          <div class="col fw-bold text">Total:</div>
+          <div class="col d-flex justify-content-end"> <b>{{ (cartItems$ | async) ? (calculateGrandTotal((cartItems$ |
+              async)) | currency:'NGN ':'symbol':'1.0-0') : '₦0.00' }}</b> </div>
+        </div>
+        <button class="btn d-flex mx-auto" (click)="checkout()">Checkout</button>
+        <button class="d-flex mx-auto" style="background-color: transparent; color:black; border:unset"
+          (click)="clearCart()">Clear Cart</button>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<ng-template #emptyCart>
+  <div class="text-center d-flex justify-content-center  mt-3 mb-1">
+    <p>Your cart is empty.</p>
+  </div>
+</ng-template>

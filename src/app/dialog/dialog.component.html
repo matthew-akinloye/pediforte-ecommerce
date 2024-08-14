@@ -1,0 +1,8 @@
+<!-- image-modal.component.html -->
+<h1 mat-dialog-title>Product Image</h1>
+<div mat-dialog-content>
+  <img [src]="data.imageUrl" style="width: 100%; height: auto;">
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="closeDialog()">Close</button>
+</div>
